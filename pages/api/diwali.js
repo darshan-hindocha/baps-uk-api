@@ -49,6 +49,9 @@ async function fetchWithCache(key) {
                 data[centerFirstLetter] = [];
             }
             data[centerFirstLetter].push(rowItems);
+            data[centerFirstLetter].sort((a, b) => {
+                return a.centreName.localeCompare(b.centreName);
+            });
         });
         const minutes = 1;
         cacheData.put(key, data, 1000 * 60 * minutes);
