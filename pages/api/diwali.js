@@ -47,6 +47,7 @@ async function fetchWithCache(key) {
                 addressTwo: row?.addressTwo ? row.addressTwo : "",
                 eventThreeDate: row?.eventThreeDate ? row.eventThreeDate : "",
                 eventThreeDetails: row?.eventThreeDetails ? row.eventThreeDetails : "",
+                info: row?.info ? row.info : "",
             };
             if (!data[centerFirstLetter]) {
                 data[centerFirstLetter] = [];
