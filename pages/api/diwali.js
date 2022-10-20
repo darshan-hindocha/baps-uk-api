@@ -1,29 +1,29 @@
-import { connectGoogleSheet } from "../../lib/connectGoogleSheets";
+import {connectGoogleSheet} from "../../lib/connectGoogleSheets";
 import Cors from 'cors'
 
 import cacheData from "memory-cache";
 
 const cors = Cors({
-  methods: ['GET'],
+    methods: ['GET'],
     origin: true,
 })
 
 // Helper method to wait for a middleware to execute before continuing
 // And to throw an error when an error happens in a middleware
 function runMiddleware(
-  req,
-  res,
-  fn
+    req,
+    res,
+    fn
 ) {
-  return new Promise((resolve, reject) => {
-    fn(req, res, (result) => {
-      if (result instanceof Error) {
-        return reject(result)
-      }
+    return new Promise((resolve, reject) => {
+        fn(req, res, (result) => {
+            if (result instanceof Error) {
+                return reject(result)
+            }
 
-      return resolve(result)
+            return resolve(result)
+        })
     })
-  })
 }
 
 async function fetchWithCache(key) {
@@ -37,14 +37,17 @@ async function fetchWithCache(key) {
         let data = {}
         rows.forEach((row) => {
             const centerFirstLetter = row.centreName[0].toUpperCase();
-                const rowItems = {
-                  centreName: row?.centreName ? row.centreName : "",
-                  address: row?.address ? row.address : "",
-                  eventOneDate: row?.eventOneDate ? row.eventOneDate : "",
-                  eventOneDetails: row?.eventOneDetails ? row.eventOneDetails : "",
-                  eventTwoDate: row?.eventTwoDate ? row.eventTwoDate : "",
-                  eventTwoDetails: row?.eventTwoDetails ? row.eventTwoDetails : "",
-                };
+            const rowItems = {
+                centreName: row?.centreName ? row.centreName : "",
+                address: row?.address ? row.address : "",
+                eventOneDate: row?.eventOneDate ? row.eventOneDate : "",
+                eventOneDetails: row?.eventOneDetails ? row.eventOneDetails : "",
+                eventTwoDate: row?.eventTwoDate ? row.eventTwoDate : "",
+                eventTwoDetails: row?.eventTwoDetails ? row.eventTwoDetails : "",
+                addressTwo: row?.addressTwo ? row.addressTwo : "",
+                eventThreeDate: row?.eventThreeDate ? row.eventThreeDate : "",
+                eventThreeDetails: row?.eventThreeDetails ? row.eventThreeDetails : "",
+            };
             if (!data[centerFirstLetter]) {
                 data[centerFirstLetter] = [];
             }
